@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+{#<link rel="stylesheet" href="{% static '/../base/css/site.css' %}">#}
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Blog app</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Blog detail</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">maps</a>
+        </li>
+      </ul>
+
+        <span></span>
+      <form action="/" method="get" class="d-flex">
+        <input id="q" class="form-control me-2" name="q" value="#" type="text" placeholder="Search">
+        <button class="btn btn-primary" type="button">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<main class="container" role="main">
+<div class="starter-template">
+  {% block content %}
+
+  {% endblock %}
+</div>
+</main>
+
+
+
+
+<script id="dsq-count-scr" src="//realblog-1.disqus.com/count.js" async></script>
+</body>
+</html>

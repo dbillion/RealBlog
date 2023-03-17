@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<h1>index Page</h1>
+    <table>
+    {% for list in postlist %}
+        <tr>
+        <td>{{ list.postname }}</td>
+        <td>{{ list.content }}</td>
+        </tr>
+    {% endfor  %}
+    </table>
+{% endblock  %}
