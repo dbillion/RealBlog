@@ -1,0 +1,80 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>oludayo cv builder</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="The Curriculum Vitae of oludayo adeoye" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+ <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">Travel Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 'info' %}">CV builder</a>
+            </li>
+          </ul>
+           <form class="form-inline mt-2 mt-md-0"  method="get" action="{% url 'blog' %}">
+               {% csrf_token %}
+            <input class="form-control mr-sm-2" type="text"  name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" value="Search"  type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+<body style="padding:20px;">
+
+   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">Travel Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+            </li>
+          </ul>
+           <form class="form-inline mt-2 mt-md-0"  method="get" action="{% url 'blog' %}">
+               {% csrf_token %}
+            <input class="form-control mr-sm-2" type="text"  name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" value="Search"  type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+<br>
+   <br>
+    <h1 class="mt-2" style="text-align:center;font-weight:bolder;color:steelblue;">Welcome to oludayo Resume Builder!!!</h1>
+    <hr class="mt-0 mb-4">
+<!--     <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type='Submit'>Submit</button>
+
+    </form> -->
+    {% crispy form form.helper %}
+
+</body>
+
+</html>

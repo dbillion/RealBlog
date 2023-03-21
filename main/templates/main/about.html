@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -135,10 +135,14 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'blog' %}">Blog</a>
             </li>
+                <li class="nav-item">
+              <a class="nav-link" href="{% url 'info' %}">CV builder</a>
+            </li>
           </ul>
-          <form class="form-inline mt-2 mt-md-0" action="{% url 'blog' %}" method="get">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q" value="{{ request.Get.q }}" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+           <form class="form-inline mt-2 mt-md-0"  method="get" action="{% url 'blog' %}">
+               {% csrf_token %}
+            <input class="form-control mr-sm-2" type="text"  name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" value="Search"  type="submit">Search</button>
           </form>
         </div>
       </nav>
@@ -152,53 +156,32 @@
 
 
 
-      <!-- google map api -->
-      <div id="map"></div>
+
       <br><br>
 
 
       <div class="container marketing">
-
+{% for list in postlist|slice:":2" %}
         <!-- Three columns of text below the carousel -->
         <div class="row">
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          <div class="col-lg-6">
+
+            <img class="rounded-circle" src="{{ list.image.url }}" alt="{{list.postname}}" width="140" height="140">
+
+              <h2>{{list.postname}}</h2>
+            <p>{{ list.contents }}</p>
             <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
           </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
+            <div class="p-6"></div>
         </div><!-- /.row -->
+
+          {% endfor %}
       </div><!-- /.container -->
 
     <div>
         <!-- <template_name>.html -->
-{% for featurette in postlist|slice:":4" %}
-<hr class="featurette-divider">
 
-<div class="row featurette">
-  <div class="col-md-7{{ featurette.order }}">
-    <h2 class="featurette-heading">{{ featurette.postname }} <span class="text-muted">{{ featurette.tag }}</span></h2>
-    {{ featurette.contents|safe }}
-  </div>
-  <div class="col-md-5{% if not forloop.last %} order-md-1{% endif %}">
-    <img class="featurette-image img-fluid mx-auto" src="{{ featurette.image.url }}" alt="{{ featurette.postname }}">
-  </div>
-</div>
 
-{% endfor %}
-<hr class="featurette-divider">
     </div>
 
       <!-- FOOTER -->

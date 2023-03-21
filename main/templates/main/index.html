@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -135,8 +135,12 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'blog' %}">Blog</a>
             </li>
+                <li class="nav-item">
+              <a class="nav-link" href="{% url 'info' %}">CV builder</a>
+            </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0" action="{% url 'blog' %}" method="get">
+              {% csrf_token %}
             <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q" value="{{ request.Get.q }}" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -158,7 +162,10 @@
     <div class="carousel-inner">
         {% for post in postlist %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+
                 <img src="{{ post.image.url }}" alt="{{ post.title }}">
+
                 <div class="container">
                     <div class="carousel-caption text-left bg-dark p-3" style="background-color: rgba(0, 0, 0, 0.9);">
                         <h1>{{ post.postname }}</h1>
@@ -187,31 +194,36 @@
       <br><br>
 
 
-      <div class="container marketing">
+    <div class="test">
 
-        <!-- Three columns of text below the carousel -->
         <div class="row">
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+   <div class="form-group col-md align-items-start flex-column">
+      <label for="origin" class="d-inline-flex">From</label>
+      <input type="text" placeholder="City or Airport" class="form-control" id="origin" name="origin"
+         required>
+   </div>
+   <div class="form-group col-md align-items-start flex-column">
+      <label for="depart" class="d-inline-flex">To</label>
+      <input type="text" placeholder="City or Airport" class="form-control" id="depart" name="depart"
+         required>
+   </div>
+</div>
 
-
+        <div class="row">
+   <div class="form-group col-md align-items-start flex-column">
+      <label for="departure-date" class="d-inline-flex">Depart</label>
+      <input type="date" class="form-control" id="departure-date" name="departure-date"
+         onkeydown="return false" required>
+   </div>
+   <div class="form-group col-md align-items-start flex-column">
+      <label for="return-date" class="d-inline-flex">Return</label>
+      <input type="date" placeholder="One way" value=""
+         onChange="this.setAttribute('value', this.value)" class="form-control" id="return-date"
+         name="return-date">
+   </div>
+</div>
+    </div>
+      <div class="container marketing">
 
 
 
@@ -226,7 +238,11 @@
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
           </div>
           <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" src="{{ post.image.url }}" alt="Generic placeholder image">
+
+               {% load static %}
+            <img class="featurette-image img-fluid mx-auto" src="{% static 'images/fut12.png' %}" alt="Generic placeholder image">
+
+
           </div>
         </div>
 
@@ -238,7 +254,10 @@
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
           </div>
           <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" src="img/jeju.jpg" alt="Generic placeholder image">
+
+              {% load static %}
+            <img class="featurette-image img-fluid mx-auto" src="{% static 'images/fut11.png' %}" alt="Generic placeholder image">
+
           </div>
         </div>
 
@@ -250,7 +269,10 @@
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
           </div>
           <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" src="img/perth.jpg" alt="Generic placeholder image">
+
+               {% load static %}
+            <img class="featurette-image img-fluid mx-auto" src="{% static 'images/fut10.png' %}" alt="Generic placeholder image">
+
           </div>
         </div>
 
@@ -262,26 +284,15 @@
 
     <div>
         <!-- <template_name>.html -->
-{% for featurette in postlist|slice:":4" %}
-<hr class="featurette-divider">
 
-<div class="row featurette">
-  <div class="col-md-7{{ featurette.order }}">
-    <h2 class="featurette-heading">{{ featurette.postname }} <span class="text-muted">{{ featurette.tag }}</span></h2>
-    {{ featurette.contents|safe }}
-  </div>
-  <div class="col-md-5{% if not forloop.last %} order-md-1{% endif %}">
-    <img class="featurette-image img-fluid mx-auto" src="{{ featurette.image.url }}" alt="{{ featurette.postname }}">
-  </div>
-</div>
 
-{% endfor %}
+
 <hr class="featurette-divider">
     </div>
 
       <!-- FOOTER -->
       <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
+        <p class="float-right"><a href="#top">Back to top</a></p>
         <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
     </main>

@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 {% block content %}
   <head>
     <!-- Required meta tags -->
@@ -127,8 +127,12 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'blog' %}">Blog<span class="sr-only">(current)</span></a>
             </li>
+                <li class="nav-item">
+              <a class="nav-link" href="{% url 'info' %}">CV builder</a>
+            </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0"  action="/" method="get">
+              {% csrf_token %}
             <input class="form-control mr-sm-2"  name="q" value="{{ request.Get.q }}" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -149,7 +153,9 @@
                 <p class="blog-post-meta">{{postlist.postname }}: {{ postlist.modifiedDate }}</p>
                 <p class="blog-post-meta">{{postlist.postname }} : {{ postlist.publishedDate }}</p>
                 {% if postlist.mainphoto %}
+
                     <img src="{{ postlist.mainphoto.url }}">
+
                 {% endif %}
 
                 <p>{{ postlist.contents|linebreaks }}</p>
@@ -185,7 +191,9 @@
     <div class="carousel-inner">
         {% for post in poster %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
                 <img src="{{ post.image.url }}" alt="{{ post.title }}">
+
                 <div class="container">
                     <div class="carousel-caption text-left " >
 

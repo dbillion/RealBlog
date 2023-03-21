@@ -1,3 +1,5 @@
+import os.path
+
 from decouple import config
 
 from pathlib import Path
@@ -13,7 +15,7 @@ SECRET_KEY = config('My_Key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -26,9 +28,17 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main",
     'bootstrap5',
+    'bootstrap4',
     'taggit',
     'django_filters',
+    'crispy_forms',
+    "cvbuilder",
+    "flight",
+    "crispy_bootstrap4",
+    # "crispy_bootstrap5",
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -67,23 +77,33 @@ WSGI_APPLICATION = "RealBlog.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-"NAME": 'postgres',
-"USER": 'masteruser',
-"PASSWORD": 'Oludayo1234',
-"HOST": 'django-realblog.c0aifw43q4rk.us-east-1.rds.amazonaws.com',
-"PORT": '5432',
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": 'postgres',
+#         "USER": 'masteruser',
+#         "PASSWORD": 'Oludayo1234',
+#         "HOST": 'django-realblog.c0aifw43q4rk.us-east-1.rds.amazonaws.com',
+#         "PORT": '5432',
+#     }
+# # }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv('postgres'),
+#         "USER": os.getenv('masteruser'),
+#         "PASSWORD": os.getenv('Oludayo1234'),
+#         "HOST": os.getenv('django-realblog.c0aifw43q4rk.us-east-1.rds.amazonaws.com'),
+#         "PORT": os.getenv('5432'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -122,7 +142,11 @@ STATIC_URL = 'static'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = 'media/'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

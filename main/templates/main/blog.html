@@ -129,8 +129,12 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'blog' %}">Blog<span class="sr-only">(current)</span></a>
             </li>
+                <li class="nav-item">
+              <a class="nav-link" href="{% url 'info' %}">CV builder</a>
+            </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0"  method="get" action="{% url 'blog' %}">
+              {% csrf_token %}gi
             <input class="form-control mr-sm-2" type="text"  name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" value="Search"  type="submit">Search</button>
           </form>
@@ -157,17 +161,20 @@
             {% for list in postlist %}
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
-                                  <a href="'#"><img class="card-img-top" src="{{ list.image.url|default_if_none:"nothing"}}" alt="Card image cap"></a>
-                                <div class="card-body">
+
+
+                                  <a href="{% url 'postdetails' pk=list.pk %}"><img class="card-img-top" src="{{ list.image.url|default_if_none:"nothing"}}" alt="Card image cap"></a>
+
+                  <div class="card-body">
                   <p class="card-text">{{list.postname}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a href="{% url 'postdetails' pk=list.pk %}">
                       <button type="button" class="btn btn-sm btn-outline-secondary"  >View</button>
                             </a>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+
                     </div>
-                    <small class="text-muted">9 mins</small>
+                    <small class="text-muted">{{ list.modifiedDate }}</small>
                   </div>
                 </div>
               </div>
@@ -180,7 +187,7 @@
 
       <!-- FOOTER -->
       <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
+        <p class="float-right"><a href="#top">Back to top</a></p>
         <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
     </main>
