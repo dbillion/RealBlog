@@ -1,5 +1,6 @@
 import os.path
-
+import os
+from dotenv import load_dotenv
 from decouple import config
 
 from pathlib import Path

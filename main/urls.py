@@ -7,5 +7,6 @@ urlpatterns =[
     path("blog", views.blog, name="blog"),
     path("about", views.about, name="about"),
     path('blog/<int:pk>', views.postdetails, name="postdetails"),
+    path('blog', views.chatton, name='chatton'),
 
 ]
